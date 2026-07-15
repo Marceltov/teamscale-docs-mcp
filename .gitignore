@@ -1,0 +1,10 @@
+# Python / uv
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# Superpowers design docs — local only
+docs/superpowers/
+
+# Local exploration/session notes
+test-sessions/

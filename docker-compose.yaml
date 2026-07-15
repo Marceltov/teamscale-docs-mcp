@@ -1,0 +1,42 @@
+# Standalone docs MCP server. It needs no Teamscale instance — it serves the
+# public documentation from docs.teamscale.com.
+services:
+  teamscale:
+    image: 'cqse/teamscale:2026.4.latest'
+    restart: unless-stopped
+    working_dir: /var/teamscale
+    volumes:
+      - ./teamscale-data:/var/teamscale
+    ports:
+      - "8080:8080"
+    healthcheck:
+      # curl is present in the cqse/teamscale image; a bare GET returns a 303
+      # login redirect once the app is up, which is enough to call it "healthy"
+      # (curl -f only fails on 4xx/5xx, so the redirect is accepted).
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  teamscale-docs-mcp:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      teamscale:
+        condition: service_healthy
+    environment:
+      # Serve the local instance's version-matched docs (VitePress + sitemap at
+      # /documentation/) so no request leaves the network. Use the in-network
+      # service name `teamscale`. Set this to https://docs.teamscale.com instead
+      # to serve the public docs.
+      DOCS_BASE_URL: http://teamscale:8080/documentation
+    ports:
+      # 8082 on the host to avoid colliding with teamscale-mcp (8081).
+      - "8082:8082"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8082/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s

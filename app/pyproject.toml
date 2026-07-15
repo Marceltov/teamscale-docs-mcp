@@ -1,0 +1,29 @@
+[project]
+name = "teamscale_docs_mcp"
+version = "0.1.0"
+description = "Standalone MCP server exposing Teamscale's public documentation over HTTP"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=3.0.0",
+    "httpx>=0.28.1",
+    "uvicorn>=0.30",
+    "beautifulsoup4>=4.12",
+    "markdownify>=0.13",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=0.24",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+filterwarnings = [
+    # starlette.testclient's httpx usage is deprecated upstream; not actionable here.
+    "ignore:Using `httpx` with `starlette.testclient`",
+]
