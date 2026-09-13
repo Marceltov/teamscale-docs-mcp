@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://github.com/MarcelBruckner/teamscale-docs-mcp">Teamscale Docs MCP server</a></h1>
+<h1 align="center"><a href="https://github.com/Marceltov/teamscale-docs-mcp">Teamscale Docs MCP server</a></h1>
 
 <p align="center"><em>Standalone MCP server exposing Teamscale's product documentation as tools — sitemap catalog + on-demand Markdown, no auth, self-hosted or central</em></p>
 
@@ -15,7 +15,7 @@ It can point at either a Teamscale instance's own **bundled documentation**
 [Architecture](#architecture). The docs are public content, so **the server
 needs no authentication** — no tokens, no identity headers.
 
-> **Related:** [**teamscale-mcp**](https://github.com/MarcelBruckner/teamscale-mcp)
+> **Related:** [**teamscale-mcp**](https://github.com/Marceltov/teamscale-mcp)
 > is the companion server that exposes Teamscale's **REST API** as MCP tools
 > (against your instance, with per-client credentials). The two are designed to
 > run side by side as sidecars — this docs server on `8082`, teamscale-mcp on
@@ -52,7 +52,7 @@ gaps. This docs server serves a **different audience**: people who need to
   reference at their fingertips across many customer instances.
 
 Pair it with the companion
-[**teamscale-mcp**](https://github.com/MarcelBruckner/teamscale-mcp) (the Teamscale
+[**teamscale-mcp**](https://github.com/Marceltov/teamscale-mcp) (the Teamscale
 REST API as tools) and the agent can both **explain** Teamscale — concepts,
 how-tos, reference (this server) — and **act on it** — read data, set up projects,
 adjust analysis profiles (teamscale-mcp) — in one conversation. Together they're a
@@ -135,7 +135,7 @@ docker compose up -d teamscale-docs-mcp
 Both services share the compose network, so `teamscale` resolves to your
 existing container. The MCP endpoint is then available at
 `http://localhost:8082/docs-mcp`. (Port `8082` and path `/docs-mcp` both differ
-from the sibling [teamscale-mcp](https://github.com/MarcelBruckner/teamscale-mcp),
+from the sibling [teamscale-mcp](https://github.com/Marceltov/teamscale-mcp),
 whose REST API MCP server runs on `8081` at `/mcp` — so the two never collide,
 even behind one host.)
 
