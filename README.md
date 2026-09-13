@@ -100,7 +100,7 @@ services:
     # ... your existing Teamscale service ...
 
   teamscale-docs-mcp:
-    image: ghcr.io/marcelbruckner/teamscale-docs-mcp:latest
+    image: ghcr.io/marceltov/teamscale-docs-mcp:latest
     container_name: teamscale-docs-mcp
     restart: unless-stopped
     depends_on:
